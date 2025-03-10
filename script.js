@@ -54,16 +54,18 @@ function provideAnswer(question) {
         case 'hi':
         case 'hey':
         case 'help':
-            answer = 'Hello! How can I assist you today? Here are some common questions: <br> 1. Admission Requirements <br> 2. Offered Courses <br> 3. Tuition Fees <br> 4. Application Process <br> 5. University Location <br> 6. Weather Update <br><br> Just type the number or ask your question!';
+            answer = 'Hello! How can I assist you today?
+                break; 
+              Here are some common questions: <br> 1. Admission Requirements <br> 2. Offered Courses <br> 3. Tuition Fees <br> 4. Application Process <br> 5. University Location <br> 6. Weather Update <br><br> Just type the number or ask your question!';
             break;
         case '1':
         case 'what are the admission requirements?':
-            answer = 'You need a Senior Secondary School Certificate, Birth Certificate, International Passport, and 8 Passport Photos.';
-            link = 'https://esfambeninuni.com/admission.php';
+            answer = 'You need a Senior Secondary School Certificate, Birth Certificate/declaration of age, national Identity card, Indigene letter, and 8 Passport Photos.';
+            link = 'https://www.esfambeninuni.com/applynow.php';
             break;
         case '2':
         case 'what courses are offered?':
-            answer = 'Courses include Business, Communication, and more. Visit our Academics page for details.';
+            answer = 'Courses include Business, Communication, Computer Science, Information Technology, ISS, Nursing, and more. Visit our Academics page for more details.';
             link = 'https://esfambeninuni.com/academics.php';
             break;
         case '3':
@@ -74,11 +76,11 @@ function provideAnswer(question) {
         case '4':
         case 'how can i apply?':
             answer = 'Apply online through our portal.';
-            link = 'https://esfambeninuni.com/apply.php';
+            link = 'https://www.esfambeninuni.com/applynow.php';
             break;
         case '5':
         case 'where is the university located?':
-            answer = 'ESFAM University is located in Porto Novo, Benin Republic.';
+            answer = 'ESFAM University is located in Porto Novo, Benin Republic and have campus in Nigeria at Ikorodu L.G.A.';
             link = 'https://esfambeninuni.com/contact.php';
             break;
         case '6':
@@ -96,7 +98,7 @@ function provideAnswer(question) {
 // Voice Response
 function speakMessage(message) {
     const speech = new SpeechSynthesisUtterance(message);
-    speech.lang = 'en-US';
+    speech.lang = 'ha-NIG';
     speech.rate = 1;
     window.speechSynthesis.speak(speech);
 }
