@@ -24,23 +24,19 @@ function displayBotMessage(message) {
     messageContainer.classList.add('message', 'bot-message');
 
     const botAvatar = document.createElement('img');
-    botAvatar.src = './images/bot_avatar.png'; // Ensure the path is correct
+    botAvatar.src = 'bot_avatar.png'; // Ensure this image exists in your project
     botAvatar.classList.add('bot-avatar');
 
     messageContainer.appendChild(botAvatar);
-    
-    const textElement = document.createElement('span');
-    textElement.textContent = "Typing...";
-    messageContainer.appendChild(textElement);
-    
+    messageContainer.innerHTML = "Typing...";
     document.getElementById('chatbot-messages').appendChild(messageContainer);
 
     setTimeout(() => {
-        textElement.innerHTML = message;
+        messageContainer.innerHTML = message;
     }, 1000);
 
     if (isVoiceEnabled) {
-        speakMessage(message);
+        speakMessage(message.replace(/<[^>]*>?/gm, '')); // Remove HTML before speaking
     }
 }
 
@@ -54,13 +50,11 @@ function provideAnswer(question) {
         case 'hi':
         case 'hey':
         case 'help':
-            answer = 'Hello! How can I assist you today?
-                break; 
-              Here are some common questions: <br> 1. Admission Requirements <br> 2. Offered Courses <br> 3. Tuition Fees <br> 4. Application Process <br> 5. University Location <br> 6. Weather Update <br><br> Just type the number or ask your question!';
+            answer = 'Hello! How can I assist you today?<br><br>Here are some common questions: <br> 1. Admission Requirements <br> 2. Offered Courses <br> 3. Tuition Fees <br> 4. Application Process <br> 5. University Location <br> 6. Weather Update <br><br> Just type the number or ask your question!';
             break;
         case '1':
         case 'what are the admission requirements?':
-            answer = 'You need a Senior Secondary School Certificate, Birth Certificate/declaration of age, national Identity card, Indigene letter, and 8 Passport Photos.';
+            answer = 'You need a Senior Secondary School Certificate, Birth Certificate/declaration of age, National Identity Card, Indigene Letter, and 8 Passport Photos.';
             link = 'https://www.esfambeninuni.com/applynow.php';
             break;
         case '2':
@@ -80,7 +74,7 @@ function provideAnswer(question) {
             break;
         case '5':
         case 'where is the university located?':
-            answer = 'ESFAM University is located in Porto Novo, Benin Republic and have campus in Nigeria at Ikorodu L.G.A.';
+            answer = 'ESFAM University is located in Porto Novo, Benin Republic, and has a campus in Nigeria at Ikorodu L.G.A.';
             link = 'https://esfambeninuni.com/contact.php';
             break;
         case '6':
@@ -136,7 +130,7 @@ async function getWeather() {
     }
 }
 
-// Convert Weather Code to Human-Readable Condition
+// Convert Weather Code to Readable Text
 function mapWeatherCode(code) {
     const weatherConditions = {
         1000: "Clear Sky",
@@ -145,15 +139,11 @@ function mapWeatherCode(code) {
         1102: "Mostly Cloudy",
         2000: "Fog",
         2100: "Light Fog",
-        4000: "Drizzle",
-        4200: "Light Rain",
-        5001: "Flurries",
+        3000: "Drizzle",
+        4000: "Rain",
         5000: "Snow",
         6000: "Freezing Drizzle",
-        6200: "Light Freezing Rain",
-        7000: "Ice Pellets",
-        7102: "Light Ice Pellets",
-        8000: "Thunderstorm"
+        7000: "Thunderstorm"
     };
 
     return weatherConditions[code] || "Unknown Condition";
